@@ -1,6 +1,8 @@
 import React  from 'react';
+import {useHistory} from 'react-router-dom'
 import "antd/dist/antd.css";
 import { Form, Input, Button, Checkbox, Row, Col} from "antd";
+
 
 const layout = {
     labelCol: {
@@ -18,6 +20,8 @@ const tailLayout = {
 };
 function LoginForm(){
 
+    const history = useHistory()
+
   const onFinish = async (values) => {
       console.log("Success:", values);
       // call api to login
@@ -33,6 +37,8 @@ function LoginForm(){
                 email: values.username,
                 password: values.password,
             })
+        }).then((res) => {
+            history.push('/wall');
         })
 
         console.log({response});
