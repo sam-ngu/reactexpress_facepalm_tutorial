@@ -12,15 +12,9 @@ function PublicMaster(props){
 
             {props.children}
 
-
         </main>
 
-
-
     )
-
-
-
 
 }
 

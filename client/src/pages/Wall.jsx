@@ -3,11 +3,10 @@ import AppMaster from './../pages/layout/app/AppMaster'
 
 function Wall(){
 
+
     return (
         <AppMaster>
             
-            
-
 
             {/* profile page */}
             {/* profile page */}

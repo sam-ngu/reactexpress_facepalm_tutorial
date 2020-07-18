@@ -22,7 +22,14 @@ function LoginForm(){
                 password: values.password,
             })
         }).then((res) => {
+            
+
+            
             history.push('/wall');
+        }).catch(() => {
+            // not authenticated
+
+
         })
 
         console.log({response});
@@ -38,7 +45,7 @@ function LoginForm(){
 
  return (
      <section>
-         
+
      </section>
      
  );

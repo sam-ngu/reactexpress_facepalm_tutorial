@@ -5,7 +5,6 @@ function AppMaster(props) {
     return (
         <main {...props}>
             <Navbar></Navbar>
-
             {props.children}
         </main>
     );

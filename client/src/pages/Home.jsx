@@ -9,12 +9,7 @@ function Home (props){
 
     return (
         <PublicMaster style={{ height: "100%" }}>
-
-            <Row justify="center" align="align" style={{marginTop: '50px'}}>
-                <Col span={12}>
-                    <LoginForm />
-                </Col>
-            </Row>
+            <LoginForm />
 
             {/* card */}
 
