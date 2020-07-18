@@ -4,13 +4,10 @@ import {useHistory} from 'react-router-dom'
 
 function LoginForm(){
 
-    const history = useHistory()
+    const history = useHistory();
 
   const onSubmit = async (data) => {
-      console.log("Success:", values);
       // call api to login
-      console.log({values});
-
         const response = await fetch('http://localhost:3001/api/login', {
             mode: 'cors',
             method: 'POST',
@@ -18,8 +15,8 @@ function LoginForm(){
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                email: values.username,
-                password: values.password,
+                email: data.username,
+                password: data.password,
             })
         }).then((res) => {
             
@@ -38,8 +35,6 @@ function LoginForm(){
         // localhost/api/v1/login
         // localhost/api/users
         // localhost/api/posts
-      
-
   };
 
 
