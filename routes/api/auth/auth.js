@@ -1,15 +1,15 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
-const passportConfig = require('./../../../config/passport')
-router.post('/login',passportConfig.isAuthenticated, passportConfig.isAuthorized, (req, res, next) => {
+
+router.post('/login', (req, res, next) => {
 
     passport.authenticate("local", (err, user, info) => {
         if (err) {
             return next(err);
         }
         if (!user) {
-            return res.staus(422).json({
+            return res.status(422).json({
                 data: info.msg
             });
         }

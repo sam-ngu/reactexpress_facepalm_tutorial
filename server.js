@@ -3,6 +3,9 @@ const session = require("express-session");
 const passport = require("passport");
 const dotenv = require("dotenv");
 
+const passportConfig = require("./config/passport");
+
+
 const MongoStore = require("connect-mongo")(session);
 const routes = require("./routes");
 dotenv.config({ path: ".env" });
@@ -20,9 +23,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 connectDb()
-
-
-
 
 
 app.use(
@@ -44,7 +44,11 @@ app.use(passport.session());
 
 
 // Add routes, both API and view
-app.use('/api',  routes);
+
+// app.use("/api", passportConfig.isAuthenticated, passportConfig.isAuthorized);
+
+
+app.use('/api',   routes);
 
 
 
