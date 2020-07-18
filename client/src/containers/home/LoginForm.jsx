@@ -62,6 +62,7 @@ function LoginForm(){
      >
          <Form.Item
              label="Email"
+             style={{marginLeft:"2em"}}
              name="username"
              rules={[
                  {

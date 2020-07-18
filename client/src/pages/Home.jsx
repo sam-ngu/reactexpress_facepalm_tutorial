@@ -8,10 +8,10 @@ import {Row, Col} from 'antd'
 function Home (props){
 
     return (
-        <PublicMaster style={{ height: "100%" }}>
+        <PublicMaster>
 
-            <Row justify="center" align="align" style={{marginTop: '50px'}}>
-                <Col span={12}>
+            <Row style={{width:"100vw", height:"90vh", display:"flex", alignItems:"center", justifyContent:"center", paddingBottom:"10em"}}>
+                <Col span={8}>
                     <LoginForm />
                 </Col>
             </Row>
