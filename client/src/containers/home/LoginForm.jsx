@@ -26,6 +26,9 @@ function LoginForm(){
         const response = await fetch('http://localhost:3001/api/login', {
             mode: 'cors',
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 email: values.username,
                 password: values.password,
