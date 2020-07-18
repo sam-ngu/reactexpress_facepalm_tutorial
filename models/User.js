@@ -25,8 +25,7 @@ userSchema.pre("save", async function save(next) {
     // go thru bcrypt
     // bcrypt adds salt
     // adawdwdwadaw
-
-
+    
     // login
     // enter passsword
     // bcrypt => add salt to entered password
@@ -36,9 +35,8 @@ userSchema.pre("save", async function save(next) {
     // bcrypt('secret')  // dowapodawd    == > secret
     // bcrypt('secret+23132')  // dwadwaweqew12e
 
-
     bcrypt
-        .genSalt(10, (err, salt) => {})
+        .genSalt(10)
         .then((salt) => {
             return bcrypt.hash(user.password, salt);
         })

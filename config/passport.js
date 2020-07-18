@@ -19,7 +19,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
   User.findOne({ email: email.toLowerCase() }, (err, user) => {
     if (err) { return done(err); }
     if (!user) {
-        // done(err, user, info pass back to frontend)
+        // done(err, user, info pass back to controller)
       return done(null, false, { msg: `Email ${email} not found.` });
     }
     if (!user.password) {
