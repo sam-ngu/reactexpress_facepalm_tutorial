@@ -9,26 +9,6 @@ const AuthenticatedMiddleware = require("./../middleware/AuthenticatedMiddleware
 
 const router = express.Router()
 
-router.post('/*', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", '*');
-    next()
-})
-
-router.get("/*", (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
-});
-
-router.delete("/*", (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
-});
-
-router.patch("/*", (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
-});
-
 
 
 // to protect the following routes

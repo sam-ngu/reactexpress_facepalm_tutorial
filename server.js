@@ -1,16 +1,20 @@
 const express = require("express");
 const session = require("express-session");
-const passport = require("passport");
 const dotenv = require("dotenv");
+const cors = require("cors");
 
-const passportConfig = require("./config/passport");
-
+const passport = require("./config/passport");
 
 const MongoStore = require("connect-mongo")(session);
 const routes = require("./routes");
 dotenv.config({ path: ".env" });
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json());
+ 
+app.use(cors());
 const connectDb = require('./config/database');
 const PORT = process.env.PORT || 3001;
 
@@ -24,7 +28,8 @@ if (process.env.NODE_ENV === "production") {
 
 connectDb()
 
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(
     session({
         resave: true,
@@ -37,18 +42,17 @@ app.use(
         }),
     })
 );
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 
 
 
 // Add routes, both API and view
 
-// app.use("/api", passportConfig.isAuthenticated, passportConfig.isAuthorized);
+// app.use("/api", passportConfig.authenticate('local'));
 
 
-app.use('/api',   routes);
+app.use('/api',  routes);
 
 
 
