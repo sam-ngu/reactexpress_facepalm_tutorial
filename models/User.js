@@ -11,6 +11,7 @@ const userSchema = new Schema(
     { timestamps: true }
 );
 
+
 /**
  * Password hash middleware.
  */
@@ -35,7 +36,7 @@ userSchema.pre("save", async function save(next) {
     // bcrypt('secret')  // dowapodawd    == > secret
     // bcrypt('secret+23132')  // dwadwaweqew12e
 
-    bcrypt
+    await bcrypt
         .genSalt(10)
         .then((salt) => {
             return bcrypt.hash(user.password, salt);
@@ -62,5 +63,6 @@ userSchema.methods.comparePassword = function comparePassword(
 };
 
 const User = mongoose.model("User", userSchema);
+
 
 module.exports = User;

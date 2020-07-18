@@ -15,7 +15,8 @@ async function seedData() {
             password: "secret",
         })
     
-        user.save()
+        User.create(user)
+        // user.save()
     }
 
     console.log('usercreated');

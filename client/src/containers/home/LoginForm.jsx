@@ -21,8 +21,23 @@ function LoginForm(){
   const onFinish = async (values) => {
       console.log("Success:", values);
       // call api to login
+      console.log({values});
 
-        fetch('')
+        const response = await fetch('http://localhost:3001/api/login', {
+            mode: 'cors',
+            method: 'POST',
+            body: JSON.stringify({
+                email: values.username,
+                password: values.password,
+            })
+        })
+
+        console.log({response});
+
+        // localhost/login
+        // localhost/api/v1/login
+        // localhost/api/users
+        // localhost/api/posts
       
 
 

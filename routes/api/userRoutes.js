@@ -2,6 +2,9 @@ const express = require("express");
 const User = require('./../../models/User');
 const router = express.Router();
 
+
+// router.use(AuthenticatedMiddleware);
+
 router.get("users", (req, res) => {
     
     User.find({}).then((results) => {
@@ -62,9 +65,6 @@ router.delete('users/:id', (req, res) => {
         })
     })
 })
-
-
-
 
 
 

@@ -1,8 +1,8 @@
 const express = require('express');
-const router = express.router
 const passport = require('passport');
-
-router.post('login', (req, res, next) => {
+const router = express.Router();
+const passportConfig = require('./../../../config/passport')
+router.post('/login',passportConfig.isAuthenticated, passportConfig.isAuthorized, (req, res, next) => {
 
     passport.authenticate("local", (err, user, info) => {
         if (err) {
@@ -24,7 +24,7 @@ router.post('login', (req, res, next) => {
     })(req, res, next);
 });
 
-router.post('logout', (req, res) => {
+router.post('/logout', (req, res) => {
     req.logout();
     req.session.destroy((err) => {
         if (err){

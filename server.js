@@ -21,6 +21,10 @@ if (process.env.NODE_ENV === "production") {
 
 connectDb()
 
+
+
+
+
 app.use(
     session({
         resave: true,
@@ -40,7 +44,7 @@ app.use(passport.session());
 
 
 // Add routes, both API and view
-app.use(routes);
+app.use('/api',  routes);
 
 
 
