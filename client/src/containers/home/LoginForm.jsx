@@ -1,13 +1,13 @@
 import React  from 'react';
 import "antd/dist/antd.css";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Row, Col} from "antd";
 
 const layout = {
     labelCol: {
-        span: 8,
+        span: 24,
     },
     wrapperCol: {
-        span: 16,
+        span: 24,
     },
 };
 const tailLayout = {
@@ -53,7 +53,6 @@ function LoginForm(){
 
  return (
      <Form
-         {...layout}
          name="basic"
          initialValues={{
              remember: true,

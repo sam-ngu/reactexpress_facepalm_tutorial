@@ -6,7 +6,7 @@ function PublicMaster(props){
 
 
     return (
-        <main>
+        <main {...props}>
 
             <Navbar></Navbar>
 

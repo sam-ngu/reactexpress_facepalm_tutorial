@@ -23,11 +23,8 @@ function Navbar(props) {
             selectedKeys={[current]}
             mode="horizontal"
         >
-            <Menu.Item key="mail" icon={<MailOutlined />}>
+            <Menu.Item >
                 Facepalm
-            </Menu.Item>
-            <Menu.Item key="app" disabled icon={<AppstoreOutlined />}>
-                Navigation Two
             </Menu.Item>
             {/* <SubMenu
                 icon={<SettingOutlined />}
