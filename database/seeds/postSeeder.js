@@ -1,6 +1,7 @@
 const faker = require("faker");
 const Post = require("./../../models/Post");
 const User = require("./../../models/User");
+const getRandomModel = require("./helper/getRandomModel");
 
 async function seedData() {
     // delete everything inside db
@@ -11,13 +12,8 @@ async function seedData() {
     console.log('creating post');
     for (let index = 0; index < 50; index++) {
 
-        const count = await User.count({});
         
-        const rand = Math.floor(Math.random()) * count
-        
-        const users = await User.find({});
-
-        const randomUser = users[rand]
+        const randomUser = await getRandomModel("User");
 
         const post = new Post({
             title: faker.lorem.sentence(),
