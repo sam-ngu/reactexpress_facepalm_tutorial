@@ -21,8 +21,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "faker": "^4.1.0",
-    "mongoose": "^5.9.25"
+    "lodash": "^4.17.19",
+    "moment": "^2.27.0",
+    "mongoose": "^5.9.25",
+    "passport": "^0.4.1"
   }
 }
