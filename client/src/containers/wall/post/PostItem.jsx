@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import moment from 'moment'
 import CommentList from './CommentList';
@@ -22,28 +23,22 @@ function PostItem(props){
                 </Typography>
 
                 <Typography gutterBottom variant="caption" component="p">
-                    {props.post.user.name} posted on {moment(props.post.createdAt).format('Do MMMM YYYY')} 
+                    {props.post.user.name} posted on{" "}
+                    {moment(props.post.createdAt).format("Do MMMM YYYY")}
                 </Typography>
 
                 <Typography variant="body2" color="textSecondary" component="p">
                     {props.post.body}
                 </Typography>
 
-
-
-                <CommentList comments={props.post.comments}>
-
-                </CommentList>
-
-
+                <CommentList post={props.post} />
             </CardContent>
             <CardActions>
-                <Button size="small" color="primary">
-                    Share
-                </Button>
-                <Button size="small" color="primary">
-                    Learn More
-                </Button>
+                <TextField
+                    name="comment"
+                    type="text"
+                    label="Comment"
+                />
             </CardActions>
         </Card>
     );

@@ -1,17 +1,27 @@
 const express = require("express");
-const Post = require("./../../models/Post");
+const Comment = require("./../../models/Comment");
 const router = express.Router();
 
-router.get("/posts", (req, res) => {
-    Post.find({}).then((results) => {
+router.get("/comments", (req, res) => {
+
+    console.log(req.query)
+
+    
+    const query = {}
+    if(req.query.post_id){
+        query.post_id = req.query.post_id
+    }
+    Comment.find(query)
+    .populate('user')
+    .then((results) => {
         res.json({
             data: results,
         });
     });
 });
 
-router.get("/posts/:id", (req, res) => {
-    Post.findOne({
+router.get("/comments/:id", (req, res) => {
+    Comment.findOne({
         _id: req.params.id,
     })
         .populate("user")
@@ -22,17 +32,17 @@ router.get("/posts/:id", (req, res) => {
         });
 });
 
-router.post("/posts", (req, res) => {
+router.post("/comments", (req, res) => {
     // validation
-    Post.create(req.body).then((created) => {
+    Comment.create(req.body).then((created) => {
         res.json({
             data: created,
         });
     });
 });
 
-router.patch("/posts/:id", (req, res) => {
-    Post.findByIdAndUpdate(
+router.patch("/comments/:id", (req, res) => {
+    Comment.findByIdAndUpdate(
         req.params.id,
         {
             $push: req.body,
@@ -45,8 +55,8 @@ router.patch("/posts/:id", (req, res) => {
     });
 });
 
-router.delete("/posts/:id", (req, res) => {
-    Post.findByIdAndDelete(req.params.id).then((deleted) => {
+router.delete("/comments/:id", (req, res) => {
+    Comment.findByIdAndDelete(req.params.id).then((deleted) => {
         res.json({
             data: true,
         });

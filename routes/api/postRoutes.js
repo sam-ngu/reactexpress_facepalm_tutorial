@@ -16,21 +16,21 @@ const loadCommentsAggregate = [
 ];
 
 router.get("/posts", (req, res) => {
+
     // loading the inverse relationship, ie getting comments from post
 
     // TODO: find a way to populate user in comments
     Post.aggregate(loadCommentsAggregate)
-    .then((results) => {
-        return Post.populate(results, {
+    // Post.find({})
+    // .populate('user')
+    .then((posts) => {
+        return Post.populate(posts, {
             path: 'user',
-            populate: {
-                path: 'user'
-            }
         })
     })
-    .then((results) => {
+    .then((posts) => {
         res.json({
-            data: results,
+            data: posts,
         });
     });
 });

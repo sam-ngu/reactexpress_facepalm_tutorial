@@ -63,33 +63,41 @@ router.post('/register', (req, res, next) => {
 
 })
 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            return next(err);
-        }
-        if (!user) {
-            console.log({info});
-            return res.status(422).json({
-                errors: [
-                    {
-                        msg: info.msg,
-                    },
-                ],
-            });
-        }
-        req.logIn(user, (err) => {
-            if(err){
-                return res.status(400).json({
-                    errors: [{msg: err}]
-                })
-            }
-            res.json({
-                data: user,
-            });
-        })
+router.post('/login', passport.authenticate('local'), (req, res, next) => {
+
+
+    res.json({
+        data: req.user
+    })
+
+    // passport.authenticate('local', (err, user, info) => {
+    //     console.log({err});
+    //     if (err) {
+    //         return next(err);
+    //     }
+    //     if (!user) {
+    //         console.log({info});
+    //         return res.status(422).json({
+    //             errors: [
+    //                 {
+    //                     msg: info.msg,
+    //                 },
+    //             ],
+    //         });
+    //     }
+    //     console.log({user});
+    //     req.logIn(user, (err) => {
+    //         if(err){
+    //             return res.status(400).json({
+    //                 errors: [{msg: err}]
+    //             })
+    //         }
+    //         res.json({
+    //             data: user,
+    //         });
+    //     })
         
-    })(req, res, next);
+    // })(req, res, next);
 });
 
 router.post('/logout', (req, res) => {
