@@ -44,7 +44,7 @@ function PostContainer(){
         <Box>
             <Container>
                 {posts.map((post) => (
-                    <PostItem post={post}/>
+                    <PostItem key={post._id} post={post}/>
                 ))}
             </Container>
         </Box>

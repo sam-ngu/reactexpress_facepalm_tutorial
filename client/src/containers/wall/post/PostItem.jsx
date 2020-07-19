@@ -6,6 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import moment from 'moment'
 
 
 function PostItem(props){
@@ -13,29 +14,19 @@ function PostItem(props){
 
     return (
         <Card>
-            <CardActionArea>
-                <CardMedia
-                    component="img"
-                    alt="Contemplative Reptile"
-                    height="140"
-                    image="/static/images/cards/contemplative-reptile.jpg"
-                    title="Contemplative Reptile"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        Lizard
-                    </Typography>
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        Lizards are a widespread group of squamate reptiles,
-                        with over 6,000 species, ranging across all continents
-                        except Antarctica
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                    {props.post.title}
+                </Typography>
+
+                <Typography gutterBottom variant="caption" component="p">
+                    {props.post.user.name} posted on {moment(props.post.createdAt).format('Do MMMM YYYY')} 
+                </Typography>
+
+                <Typography variant="body2" color="textSecondary" component="p">
+                    {props.post.body}
+                </Typography>
+            </CardContent>
             <CardActions>
                 <Button size="small" color="primary">
                     Share

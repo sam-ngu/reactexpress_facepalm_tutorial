@@ -7,8 +7,22 @@ const postSchema = new Schema(
         body: { type: String, required: true },
         user_id: { type: Schema.Types.ObjectId, ref: "User" },
     },
-    { timestamps: true }
+    { 
+        timestamps: true,
+        toJSON: {
+            virtuals: true, // to include virtual properties in json response
+        }
+     }
 );
+
+// we want to load the user resource in a virtual field
+// to be populated later on
+postSchema.virtual('user', {
+    ref: "User",
+    localField: 'user_id',
+    foreignField: '_id',
+    justOne: true
+})
 
 const Post = mongoose.model("Post", postSchema);
 
