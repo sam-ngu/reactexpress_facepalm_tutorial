@@ -1,24 +1,25 @@
-import React from "react";
-
-const USER_ACTIONS = {
+const AUTH_ACTIONS = {
     SET_USER: "set-user",
 };
 
-const userReducer = (user, action) => {
+const auth = {
+    currentUser: {}
+}
+
+const authReducer = (auth, action) => {
     switch (action.type) {
-        case USER_ACTIONS.SET_USER:
-            return action.payload;
+        case AUTH_ACTIONS.SET_USER:
+            return {
+                ...auth, // unpacking other auth properties (in case we want to add something new in the future)
+                currentUser: action.payload
+            }
         default:
             break;
     }
 };
 
+
 export default {
-    items: [
-        {
-            name: "user",
-            state: {},
-            reducer: userReducer,
-        },
-    ],
+    authReducer,
+    auth,
 };

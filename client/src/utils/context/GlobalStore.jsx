@@ -1,10 +1,7 @@
 import React, { useContext, useReducer } from "react";
-import AuthStore from "./AuthStore";
-import capitalize from 'lodash/capitalize'
+import { authReducer, auth } from './AuthStore';
 
 const globalContext = React.createContext();
-
-const stores = [AuthStore];
 
 function useGlobalContext() {
     return useContext(globalContext);
@@ -13,25 +10,21 @@ function useGlobalContext() {
 function GlobalProvider() {
     const GlobalContext = useGlobalContext();
 
-    const [] = stores.map((store) => {
+    const [authState, dispatchAuth] = useReducer(authReducer, auth)
 
 
-        const  = store.items.map((item) => {
-            const [reactiveState, dispatch] = useReducer(store.reducers);
+    return <GlobalContext.Provider value={{
+        auth: {  // grouping auth related state 
+            authState,
+            dispatchAuth,
+        }
+    }} >
+        
 
-            // looks like dispatchUser
-            const dispatchName = `dispatch${capitalize(item.name)}`
-
-            return {
-                [store.name]: reactiveState,
-                [dispatchName]: dispatch,
-            };
-        });
-    });
-
-    return <GlobalContext.Provider value={{}} />;
+    </GlobalContext.Provider>;
 }
 
 export default {
     GlobalProvider,
+    useGlobalContext,
 };
