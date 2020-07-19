@@ -67,5 +67,11 @@ router.delete('users/:id', (req, res) => {
 })
 
 
+router.get("/current-user", (req, res) => {
+    return res.json({
+        data: req.user,
+    });
+});
+
 
 module.exports = router;
