@@ -19,7 +19,7 @@ const authReducer = (auth, action) => {
 };
 
 
-export default {
+export {
     authReducer,
     auth,
 };
