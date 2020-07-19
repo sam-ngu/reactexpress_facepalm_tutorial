@@ -1,18 +1,20 @@
 const express = require('express');
 const passport = require('./../../../config/passport');
 const validator = require('validator');
+const User = require('./../../../models/User');
 
 const router = express.Router();
 
 router.post('/register', (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isEmail(req.body.email))
+  // validator is expecting a string
+  if (!validator.isEmail(req.body.email || ''))
       validationErrors.push({ msg: "Please enter a valid email address." });
-  if (!validator.isLength(req.body.password, { min: 8 }))
+  if (!validator.isLength(req.body.password || '', { min: 8 }))
       validationErrors.push({
           msg: "Password must be at least 8 characters long",
       });
-  if (req.body.password !== req.body.confirmPassword)
+  if (req.body.password !== req.body.password_again)
       validationErrors.push({ msg: "Passwords do not match" });
 
   if (validationErrors.length) {
@@ -34,12 +36,14 @@ router.post('/register', (req, res, next) => {
           return next(err);
       }
       if (existingUser) {
-          req.flash("errors", {
-              msg: "Account with that email address already exists.",
-          });
+          
           return res.status(422).json({
-              errors: msg
-          })
+              errors: [
+                  {
+                      msg: "Account with that email address already exists.",
+                  },
+              ],
+          });
       }
       user.save((err) => {
           if (err) {

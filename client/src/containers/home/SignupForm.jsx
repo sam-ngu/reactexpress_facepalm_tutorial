@@ -14,6 +14,8 @@ import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
 import isEmpty from "lodash/isEmpty";
+import Typography from "@material-ui/core/Typography";
+import axios from 'axios'
 
 const useStyles = makeStyles({
     root: {
@@ -21,6 +23,9 @@ const useStyles = makeStyles({
     },
     media: {
         height: 140,
+    },
+    error: {
+        color: "#EF5350",
     },
 });
 
@@ -51,29 +56,28 @@ function SignupForm() {
         })
     }
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (event) => {
+        event.preventDefault();
         // check if password submitted are the same 
+        if(payload.password !== payload.password_again){
+            return setErrors([
+                'Passwords do not match!'
+            ])
+        }
 
 
         // call api to login
-        const response = await fetch("http://localhost:3001/api/register", {
-            mode: "cors",
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: data.email,
-                password: data.password,
-            }),
-        })
+        const response = axios
+            .post("http://localhost:3001/api/register", payload)
             .then((res) => {
                 history.push("/wall");
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err.response);
+                const errorMsg = err.response.data.errors.map(err => err.msg)
                 // failed to register
+                setErrors([...errorMsg]);
             });
-
     };
 
     return (
@@ -143,6 +147,19 @@ function SignupForm() {
                                 </Grid>
                             </Grid>
                         </form>
+                        <article>
+                            {errors.map((error) => (
+                                <Typography
+                                    className={classes.error}
+                                    key={error}
+                                    variant="overline"
+                                    display="block"
+                                    gutterBottom
+                                >
+                                    {error}
+                                </Typography>
+                            ))}
+                        </article>
                     </CardContent>
                     <CardActions>
                         <Grid
