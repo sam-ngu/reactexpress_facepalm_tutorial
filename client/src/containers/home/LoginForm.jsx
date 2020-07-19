@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -13,6 +13,8 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
+import Typography from "@material-ui/core/Typography";
+import axios from 'axios';
 
 const useStyles = makeStyles({
     root: {
@@ -28,24 +30,43 @@ function LoginForm() {
 
     const classes = useStyles();
 
-    const onSubmit = async (data) => {
+    const [errors, setErrors] = useState([]);
+
+    const [payload, setPayload] = useState({});
+
+    const handleChange = async (event) => {
+        const type = event.target.name;
+
+        // payload looks like: {
+        //     email: '',
+        //     password: '',
+        //     password_again: ''
+        // }
+        setPayload({
+            ...payload,
+            [type]: event.target.value, // dynamically set the type of payload
+        });
+    };
+
+    const onSubmit = async (event) => {
+        event.preventDefault();
         // call api to login
-        const response = await fetch("http://localhost:3001/api/login", {
-            mode: "cors",
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: data.email,
-                password: data.password,
-            }),
-        })
-            .then((res) => {
+        const response = await axios
+            .post("http://localhost:3001/api/login", {
+                email: payload.email,
+                password: payload.password,
+            }, {
+                // withCredentials: true,
+            })
+            .then((response) => {
                 history.push("/wall");
             })
-            .catch(() => {
+            .catch((err) => {
                 // not authenticated
+                console.log(err.response);
+                const errorMsg = err.response.data.errors.map((err) => err.msg);
+                // failed to register
+                setErrors([...errorMsg]);
             });
 
         console.log({ response });
@@ -59,7 +80,7 @@ function LoginForm() {
     return (
         <Box>
             <Container maxWidth="xs">
-                <Card style={{marginTop: 50}} className={classes.root}>
+                <Card style={{ marginTop: 50 }} className={classes.root}>
                     <Grid container justify="center">
                         <h1>Welcome</h1>
                     </Grid>
@@ -85,6 +106,7 @@ function LoginForm() {
                                         id="input-with-icon-grid"
                                         name="email"
                                         label="Email"
+                                        onChange={handleChange}
                                     />
                                 </Grid>
                             </Grid>
@@ -103,10 +125,24 @@ function LoginForm() {
                                         name="password"
                                         type="password"
                                         label="Password"
+                                        onChange={handleChange}
                                     />
                                 </Grid>
                             </Grid>
                         </form>
+                        <article>
+                            {errors.map((error) => (
+                                <Typography
+                                    className={classes.error}
+                                    key={error}
+                                    variant="overline"
+                                    display="block"
+                                    gutterBottom
+                                >
+                                    {error}
+                                </Typography>
+                            ))}
+                        </article>
                     </CardContent>
                     <CardActions>
                         <Grid

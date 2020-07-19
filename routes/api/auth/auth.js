@@ -71,12 +71,24 @@ router.post('/login', (req, res, next) => {
         if (!user) {
             console.log({info});
             return res.status(422).json({
-                data: info.msg
+                errors: [
+                    {
+                        msg: info.msg,
+                    },
+                ],
             });
         }
-        res.json({
-            data: user
-        });
+        req.logIn(user, (err) => {
+            if(err){
+                return res.status(400).json({
+                    errors: [{msg: err}]
+                })
+            }
+            res.json({
+                data: user,
+            });
+        })
+        
     })(req, res, next);
 });
 

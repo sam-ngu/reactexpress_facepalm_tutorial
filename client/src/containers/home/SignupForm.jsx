@@ -36,10 +36,6 @@ function SignupForm() {
 
     const [errors, setErrors] = useState([]);
 
-    const hasErrors = () => {
-        return isEmpty(errors)
-    }
-
     const [payload, setPayload] = useState({});
 
     const handleChange = async (event) => {
@@ -68,7 +64,9 @@ function SignupForm() {
 
         // call api to login
         const response = axios
-            .post("http://localhost:3001/api/register", payload)
+            .post("http://localhost:3001/api/register", payload, {
+                withCredentials: true
+            })
             .then((res) => {
                 history.push("/wall");
             })

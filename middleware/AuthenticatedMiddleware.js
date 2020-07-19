@@ -1,12 +1,14 @@
 module.exports = (req, res, next) => {
-
-    if(req.user){
+    console.log('hey');
+    console.log(req.user);
+    console.log(req.isAuthenticated());
+    if(req.isAuthenticated()){
         next()
     }else{
         res.status(401).json({
-            data: {
-                error: "Please log in."
-            }
+            errors: [{
+                msg: "Please log in."
+            }]
         })
     }
 }

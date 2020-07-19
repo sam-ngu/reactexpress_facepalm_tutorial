@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import Navbar from "./Navbar";
-import axios from "axios";
 import GlobalStore from "./../../../utils/context/GlobalStore"
 import { useHistory } from "react-router-dom";
+import axios from 'axios'
 
 
 function AppMaster(props) {
@@ -11,7 +11,9 @@ function AppMaster(props) {
     const history = useHistory()
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/current-user')
+        axios.get('http://localhost:3001/api/current-user', {
+            withCredentials: true,
+        })
             .then((response) => {
                 store.auth.dispatchAuth({
                     type: 'set-user'

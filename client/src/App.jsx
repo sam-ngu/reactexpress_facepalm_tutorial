@@ -7,6 +7,9 @@ import Wall from "./pages/Wall";
 import GlobalStore from "./utils/context/GlobalStore";
 
 function App() {
+
+  
+
     return (
         <Router>
             <GlobalStore.GlobalProvider>

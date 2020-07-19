@@ -1,7 +1,10 @@
 const express = require("express");
 const session = require("express-session");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const corsConfig = require('./config/cors');
 
 const passport = require("./config/passport");
 
@@ -10,17 +13,18 @@ const routes = require("./routes");
 dotenv.config({ path: ".env" });
 
 const app = express();
-app.use(express.urlencoded({ extended: true }));
-
-app.use(express.json());
- 
-app.use(cors());
-const connectDb = require('./config/database');
-const PORT = process.env.PORT || 3001;
-
 // Configure body parsing for AJAX requests
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser(process.env.SESSION_SECRET));
+// app.use(bodyParser());
+
+ 
+
+app.use(cors(corsConfig));
+const connectDb = require('./config/database');
+const PORT = process.env.PORT || 3001;
+
 // Serve up static assets
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
@@ -28,20 +32,31 @@ if (process.env.NODE_ENV === "production") {
 
 connectDb()
 
-app.use(passport.initialize());
-app.use(passport.session());
+
 app.use(
     session({
         resave: true,
         saveUninitialized: true,
         secret: process.env.SESSION_SECRET,
-        cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
+        cookie: {
+            secure: false, // not using https
+            maxAge: 1209600000,
+        }, // two weeks in milliseconds
         store: new MongoStore({
             url: process.env.MONGODB_URI,
             autoReconnect: true,
         }),
     })
 );
+
+
+// app.use(
+//     session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+// );
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 
