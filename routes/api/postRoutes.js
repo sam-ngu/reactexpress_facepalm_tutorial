@@ -2,14 +2,37 @@ const express = require("express");
 const Post = require("./../../models/Post");
 const router = express.Router();
 
+const loadCommentsAggregate = [
+    {
+        $lookup: {
+            from: "comments",
+            let: { postId: "$_id" },
+            pipeline: [
+                { $match: { $expr: { $eq: ["$post_id", "$$postId"] } } },
+            ],
+            as: "comments",
+        },
+    },
+];
+
 router.get("/posts", (req, res) => {
-    Post.find({})
-        .populate("user")
-        .then((results) => {
-            res.json({
-                data: results,
-            });
+    // loading the inverse relationship, ie getting comments from post
+
+    // TODO: find a way to populate user in comments
+    Post.aggregate(loadCommentsAggregate)
+    .then((results) => {
+        return Post.populate(results, {
+            path: 'user',
+            populate: {
+                path: 'user'
+            }
+        })
+    })
+    .then((results) => {
+        res.json({
+            data: results,
         });
+    });
 });
 
 router.get("/posts/:id", (req, res) => {

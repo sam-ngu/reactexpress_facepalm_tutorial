@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Comment = require('./Comment');
 
 const postSchema = new Schema(
     {
@@ -24,7 +25,10 @@ postSchema.virtual('user', {
     justOne: true
 })
 
+
 const Post = mongoose.model("Post", postSchema);
+
+
 
 module.exports = Post;
 
