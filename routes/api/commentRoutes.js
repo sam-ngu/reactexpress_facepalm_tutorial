@@ -38,10 +38,19 @@ router.post("/comments", (req, res) => {
         user_id: req.user._id,
         post_id: req.body.post_id,
         body: req.body.body,
-    }).then((created) => {
+    }).then(async (created) => {
+        await created.populate('user').execPopulate()
         res.json({
             data: created,
         });
+    }).catch((err) => {
+        res.status(422).json({
+            errors: [
+                {
+                    msg: err
+                }
+            ]
+        })
     });
 });
 

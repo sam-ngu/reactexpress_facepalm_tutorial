@@ -12,6 +12,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import moment from 'moment'
 import CommentList from './CommentList';
 import NewComment from './NewComment';
+import { useState } from 'react';
+import axios from "axios";
 
 
 const useStyles = makeStyles({
@@ -24,6 +26,28 @@ const useStyles = makeStyles({
     },
 });
 function PostItem(props){
+
+    const [comments, setComments] = useState(null);
+
+
+    const addComment = (comment) => {
+        setComments([
+            ...comments,
+            comment
+        ])
+    };
+
+
+    const toggleComments = (hide = false) => {
+        if (hide) {
+            return setComments(null);
+        }
+        axios
+            .get(`http://localhost:3001/api/comments?post_id=${props.post._id}`)
+            .then((response) => {
+                setComments(response.data.data);
+            });
+    };
 
     const classes = useStyles();
 
@@ -43,10 +67,17 @@ function PostItem(props){
                     {props.post.body}
                 </Typography>
 
-                <CommentList post={props.post} />
+                <CommentList 
+                    comments={comments}
+                    toggleComments={toggleComments}
+                    post={props.post} postIndex={props.postIndex} 
+                />
             </CardContent>
             <CardActions>
-                <NewComment post={props.post} />
+                <NewComment
+                    addComment={addComment}
+                    post={props.post}
+                />
             </CardActions>
         </Card>
     );

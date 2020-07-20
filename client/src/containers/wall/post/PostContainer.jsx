@@ -11,8 +11,6 @@ import PostItem from './PostItem';
 import NewPost from './NewPost';
 
 
-
-
 function PostContainer(){
 
     const history = useHistory();
@@ -21,18 +19,17 @@ function PostContainer(){
 
     // call post api to load all the post in page
     useEffect(() => {
-
         axios.get('http://localhost:3001/api/posts', {
             withCredentials: true,
         })
             .then((response) => {
                 setPosts(response.data.data)
             }).catch((err) => {
+                console.log({err});
                 if(err.response.status === 401){
                     
                 }
             })
-
     }, [])
 
 
@@ -50,8 +47,12 @@ function PostContainer(){
                     See what others are up to...
                 </Typography>
 
-                {posts.map((post) => (
-                    <PostItem key={post._id} post={post} />
+                {posts.map((post, index) => (
+                    <PostItem
+                        postIndex={index} 
+                        key={post._id} 
+                        post={post} 
+                    />
                 ))}
             </Container>
         </Box>

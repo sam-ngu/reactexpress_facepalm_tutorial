@@ -7,7 +7,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import axios from 'axios';
 import moment from 'moment';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,23 +25,13 @@ function CommentList(props){
 
     const classes = useStyles();
 
-    const [comments, setComments] = useState(null)
+    // const [comments, setComments] = useState(null)
 
-
-    const toggleComments = (hide = false) => {
-        if(hide){
-            return setComments(null)
-        }
-        axios.get(`http://localhost:3001/api/comments?post_id=${props.post._id}`)
-            .then((response) => {
-                setComments(response.data.data);
-            })
-    }
 
     const renderButton = () => {
-        const hasCommentLoaded = comments !== null;
+        const hasCommentLoaded = props.comments !== null;
         return (
-            <Button onClick={() => toggleComments(hasCommentLoaded)}>
+            <Button onClick={() => props.toggleComments(hasCommentLoaded)}>
                 {!hasCommentLoaded ? "View" : "Hide"} Comments (
                 {props.post.comments ? props.post.comments.length : 0})
             </Button>
@@ -50,11 +39,11 @@ function CommentList(props){
     }
 
     const renderList = () =>{
-        if(!comments){
+        if(!props.comments){
             return <></>
         }
 
-        return comments.map((comment) => {
+        return props.comments.map((comment) => {
             return (
                 <ListItem key={comment._id} alignItems="flex-start">
                     <ListItemText

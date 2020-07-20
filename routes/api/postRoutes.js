@@ -24,7 +24,7 @@ router.get("/posts", (req, res) => {
 
     // loading the inverse relationship, ie getting comments from post
 
-    // TODO: find a way to populate user in comments
+    // find a way to populate user in comments
     Post.aggregate(loadCommentsAggregate)
     // Post.find({})
     // .populate('user')

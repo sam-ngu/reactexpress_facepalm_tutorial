@@ -20,10 +20,12 @@ function NewComment(props){
             post_id: props.post._id,
             body: comment
         }).then((response) => {
-
             console.log(response);
-            
-            
+
+            props.addComment(response.data.data);
+
+
+
         })
 
 
@@ -33,7 +35,9 @@ function NewComment(props){
 
     return (
         <form onSubmit={onSubmit}>
-            <TextField name="comment" onChange={handleChange} type="text" value={comment} label="Comment" />
+            <TextField 
+                name="comment" 
+                onChange={handleChange} type="text" value={comment} label="Comment" />
         </form>
     )
 
