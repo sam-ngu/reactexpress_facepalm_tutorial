@@ -8,15 +8,28 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
 import moment from 'moment'
 import CommentList from './CommentList';
 
 
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 345,
+    },
+    postItem: {
+        marginTop: 30,
+        marginBottom: 30,
+    },
+});
 function PostItem(props){
 
 
+    const classes = useStyles();
+   
+
     return (
-        <Card>
+        <Card className={classes.postItem}>
             <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                     {props.post.title}
@@ -34,11 +47,7 @@ function PostItem(props){
                 <CommentList post={props.post} />
             </CardContent>
             <CardActions>
-                <TextField
-                    name="comment"
-                    type="text"
-                    label="Comment"
-                />
+                <TextField name="comment" type="text" label="Comment" />
             </CardActions>
         </Card>
     );

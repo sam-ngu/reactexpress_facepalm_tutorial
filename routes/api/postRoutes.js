@@ -50,7 +50,15 @@ router.get("/posts/:id", (req, res) => {
 
 router.post("/posts", (req, res) => {
     // validation
-    Post.create(req.body).then((created) => {
+    Post.create({
+        title: req.body.title,
+        body: req.body.body,
+        user_id: req.user._id
+    }).then(async (created) => {
+
+
+        await created.populate('user').execPopulate()
+
         res.json({
             data: created,
         });

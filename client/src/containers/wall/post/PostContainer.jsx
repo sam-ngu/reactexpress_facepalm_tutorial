@@ -2,20 +2,18 @@ import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 import axios from 'axios'
 
 import PostItem from './PostItem';
+import NewPost from './NewPost';
 
 
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-    },
-});
+
 
 function PostContainer(){
-    const classes = useStyles();
 
     const history = useHistory();
     const [posts, setPosts] = useState([])
@@ -36,15 +34,26 @@ function PostContainer(){
             })
 
     }, [])
-    
+
+
+
 
 
     // text area
     return (
         <Box>
             <Container>
+                {/* text area to create new post */}
+                
+                <NewPost posts={posts} setPosts={setPosts}/>
+                <Divider></Divider>
+
+                <Typography variant="h4">
+                    See what others are up to...
+                </Typography>
+
                 {posts.map((post) => (
-                    <PostItem key={post._id} post={post}/>
+                    <PostItem key={post._id} post={post} />
                 ))}
             </Container>
         </Box>

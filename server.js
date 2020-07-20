@@ -5,24 +5,33 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const corsConfig = require('./config/cors');
+const passport = require("passport");
+const connectDb = require("./config/database");
 
-const passport = require("./config/passport");
+const passportConfig = require("./config/passport");
 
 const MongoStore = require("connect-mongo")(session);
 const routes = require("./routes");
 dotenv.config({ path: ".env" });
 
+
+
+
 const app = express();
+
+
+connectDb();
+
+
 // Configure body parsing for AJAX requests
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
 // app.use(bodyParser());
 
  
 
 app.use(cors(corsConfig));
-const connectDb = require('./config/database');
 const PORT = process.env.PORT || 3001;
 
 // Serve up static assets
@@ -30,7 +39,6 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
-connectDb()
 
 
 app.use(

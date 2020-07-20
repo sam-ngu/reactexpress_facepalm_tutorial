@@ -14,7 +14,7 @@ import TextField from "@material-ui/core/TextField";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import LockIcon from "@material-ui/icons/Lock";
 import Typography from "@material-ui/core/Typography";
-import axios from 'axios';
+import axios from "axios";
 
 const useStyles = makeStyles({
     root: {
@@ -22,6 +22,9 @@ const useStyles = makeStyles({
     },
     media: {
         height: 140,
+    },
+    error: {
+        color: "#EF5350",
     },
 });
 
@@ -52,21 +55,31 @@ function LoginForm() {
         event.preventDefault();
         // call api to login
         const response = await axios
-            .post("http://localhost:3001/api/login", {
-                email: payload.email,
-                password: payload.password,
-            }, {
-                // withCredentials: true,
-            })
+            .post(
+                "http://localhost:3001/api/login",
+                {
+                    email: payload.email,
+                    password: payload.password,
+                },
+                {
+                    // withCredentials: true,
+                }
+            )
             .then((response) => {
                 history.push("/wall");
             })
             .catch((err) => {
                 // not authenticated
                 console.log(err.response);
-                const errorMsg = err.response.data.errors.map((err) => err.msg);
-                // failed to register
-                setErrors([...errorMsg]);
+                if (err.response.data.errors) {
+                    const errorMsg = err.response.data.errors.map(
+                        (err) => err.msg
+                    );
+                    // failed to register
+                    setErrors([...errorMsg]);
+                } else {
+                    setErrors(['Whoops please enter your credentials']);
+                }
             });
 
         console.log({ response });
