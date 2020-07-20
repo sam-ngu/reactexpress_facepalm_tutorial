@@ -3,7 +3,6 @@ const User = require('./../../models/User');
 const router = express.Router();
 
 
-// router.use(AuthenticatedMiddleware);
 
 router.get("/users", (req, res) => {
     

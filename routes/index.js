@@ -14,7 +14,7 @@ const router = express.Router()
 // to protect the following routes
 router.use(auth);
 
-// router.use(AuthenticatedMiddleware)
+router.use(AuthenticatedMiddleware)
 
 router.use(user);
 router.use(post)

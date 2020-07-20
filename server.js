@@ -8,17 +8,12 @@ const corsConfig = require('./config/cors');
 const passport = require("passport");
 const connectDb = require("./config/database");
 
-const passportConfig = require("./config/passport");
-
 const MongoStore = require("connect-mongo")(session);
 const routes = require("./routes");
 dotenv.config({ path: ".env" });
 
 
-
-
 const app = express();
-
 
 connectDb();
 
@@ -32,6 +27,18 @@ app.use(cookieParser(process.env.SESSION_SECRET));
  
 
 app.use(cors(corsConfig));
+
+app.use(function (req, res, next) {
+    
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
+
+
 const PORT = process.env.PORT || 3001;
 
 // Serve up static assets
@@ -64,9 +71,6 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
 
 
 

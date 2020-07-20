@@ -1,4 +1,4 @@
 module.exports =  {
-    origin: "http://localhost:3000",
+    origin: "localhost:3000",
     credentials: true,
 };
