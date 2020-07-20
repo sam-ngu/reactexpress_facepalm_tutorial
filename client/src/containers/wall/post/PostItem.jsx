@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import moment from 'moment'
 import CommentList from './CommentList';
+import NewComment from './NewComment';
 
 
 const useStyles = makeStyles({
@@ -26,6 +27,8 @@ function PostItem(props){
 
 
     const classes = useStyles();
+
+
    
 
     return (
@@ -36,7 +39,7 @@ function PostItem(props){
                 </Typography>
 
                 <Typography gutterBottom variant="caption" component="p">
-                    {props.post.user.name} posted on{" "}
+                    {props.post.user.email} posted on{" "}
                     {moment(props.post.createdAt).format("Do MMMM YYYY")}
                 </Typography>
 
@@ -47,7 +50,7 @@ function PostItem(props){
                 <CommentList post={props.post} />
             </CardContent>
             <CardActions>
-                <TextField name="comment" type="text" label="Comment" />
+                <NewComment post={props.post} />
             </CardActions>
         </Card>
     );

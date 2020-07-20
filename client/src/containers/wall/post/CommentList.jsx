@@ -66,7 +66,7 @@ function CommentList(props){
                                     className={classes.inline}
                                     color="textPrimary"
                                 >
-                                    <b>{comment.user.name}</b>
+                                    <b>{comment.user.email}</b>
                                     [{moment(comment.createdAt).from(moment())}]
                                     - {comment.body}
                                 </Typography>

@@ -36,9 +36,6 @@ function PostContainer(){
     }, [])
 
 
-
-
-
     // text area
     return (
         <Box>
