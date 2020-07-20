@@ -16,7 +16,8 @@ function AppMaster(props) {
         })
             .then((response) => {
                 store.auth.dispatchAuth({
-                    type: 'set-user'
+                    type: 'set-user',
+                    payload: response.data.data
                 })
             }).catch((err) => {
                 if(err.response.status === 401){

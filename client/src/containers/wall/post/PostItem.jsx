@@ -25,11 +25,7 @@ const useStyles = makeStyles({
 });
 function PostItem(props){
 
-
     const classes = useStyles();
-
-
-   
 
     return (
         <Card className={classes.postItem}>

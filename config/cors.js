@@ -1,4 +1,11 @@
-const whitelist = ["http://localhost:3000", "localhost:3000"];
+const config = require('./app');
+
+const whitelist = [
+    // config.appUrl,
+    "*",
+    "http://localhost:3000",
+    "localhost:3000"
+];
 
 module.exports =  {
     origin: function (origin, callback) {

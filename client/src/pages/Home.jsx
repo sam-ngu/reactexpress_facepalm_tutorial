@@ -8,7 +8,6 @@ function Home (props){
     return (
         <PublicMaster style={{ height: "100%" }}>
             <LoginForm />
-            <img src="/Facepalm_silhouette.svg" alt="logo" />
 
             {/* card */}
 

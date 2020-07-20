@@ -15,7 +15,6 @@ const router = express.Router()
 router.use(auth);
 
 router.use(AuthenticatedMiddleware)
-
 router.use(user);
 router.use(post)
 router.use(comment)

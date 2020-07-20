@@ -43,7 +43,6 @@ function LoginForm() {
         // payload looks like: {
         //     email: '',
         //     password: '',
-        //     password_again: ''
         // }
         setPayload({
             ...payload,
@@ -82,15 +81,6 @@ function LoginForm() {
                     setErrors(['Whoops please enter your credentials']);
                 }
             });
-
-        // console.log({ response });
-
-        
-
-        // localhost/login
-        // localhost/api/v1/login
-        // localhost/api/users
-        // localhost/api/posts
     };
 
     return (
@@ -100,12 +90,6 @@ function LoginForm() {
                     <Grid container justify="center">
                         <h1>Welcome</h1>
                     </Grid>
-                    {/* <CardMedia
-                        className={classes.media}
-                        image="/static/images/cards/contemplative-reptile.jpg"
-                        title="Contemplative Reptile"
-                    >
-                    </CardMedia> */}
                     <CardContent>
                         <form onSubmit={onSubmit}>
                             <Grid

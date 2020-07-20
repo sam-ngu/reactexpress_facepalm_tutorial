@@ -14,12 +14,12 @@ function GlobalProvider({value = [], ...props}) {
 
     const [authState, dispatchAuth] = useReducer(authReducer, auth)
 
-
     return (<GlobalContext.Provider value={{
             auth: {  // grouping auth related state 
                 authState,
                 dispatchAuth,
-            }
+            },
+         
         }} {...props}
     />);
 }

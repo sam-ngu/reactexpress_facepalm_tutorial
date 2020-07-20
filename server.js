@@ -1,6 +1,6 @@
 const express = require("express");
 const session = require("express-session");
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser"); // form data
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -22,21 +22,9 @@ connectDb();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
-// app.use(bodyParser());
-
  
 
 app.use(cors(corsConfig));
-
-// app.use(function (req, res, next) {
-    
-//     res.header("Access-Control-Allow-Credentials", true);
-//     res.header(
-//         "Access-Control-Allow-Headers",
-//         "Origin, X-Requested-With, Content-Type, Accept"
-//     );
-//     next();
-// });
 
 
 const PORT = process.env.PORT || 3001;
@@ -63,11 +51,6 @@ app.use(
         }),
     })
 );
-
-
-// app.use(
-//     session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
-// );
 
 app.use(passport.initialize());
 app.use(passport.session());

@@ -43,6 +43,7 @@ function PostContainer(){
                 {/* text area to create new post */}
                 
                 <NewPost posts={posts} setPosts={setPosts}/>
+
                 <Divider></Divider>
 
                 <Typography variant="h4">

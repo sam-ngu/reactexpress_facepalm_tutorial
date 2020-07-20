@@ -35,7 +35,7 @@ router.get("/comments/:id", (req, res) => {
 router.post("/comments", (req, res) => {
     // validation
     Comment.create({
-        user_id: req.user.id,
+        user_id: req.user._id,
         post_id: req.body.post_id,
         body: req.body.body,
     }).then((created) => {
