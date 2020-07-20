@@ -27,6 +27,7 @@ const useStyles = makeStyles({
 function NewPost(props){
 
     const classes = useStyles();
+    axios.defaults.withCredentials = true;
 
     
     const [body, setBody] = useState("")

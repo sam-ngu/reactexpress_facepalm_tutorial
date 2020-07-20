@@ -29,7 +29,6 @@ const useStyles = makeStyles({
 });
 
 function LoginForm() {
-    axios.defaults.withCredentials = true;
     const history = useHistory();
 
     const classes = useStyles();
@@ -56,69 +55,33 @@ function LoginForm() {
         event.preventDefault();
         // call api to login
 
-        // await fetch("http://localhost:3001/api/login", {
-        //     headers: {
-        //         "content-type": "application/json",
-        //         accept: "application/json",
-        //     },
-        //     credentials: "include",
-        //     mode: "cors",
-        //     body: JSON.stringify({
-        //         email: payload.email,
-        //         password: payload.password,
-        //     }),
-        // }).then((response) => {
-        //     history.push("/wall");
-        // });
-
-
-        const login_axios = axios({
-            url: "http://localhost:3001/api/login",
-            method: 'post',
-            withCredentials: true,
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "x-www-form-urlencoded",
-            },
-            params: {
-                email: payload.email,
-                password: payload.password,
-            },
-        }).then((res) => {
-            console.log(res.data.data);
-        });
-
-        
-
-
-
-        // const response = await axios
-        //     .post(
-        //         "http://localhost:3001/api/login",
-        //         {
-        //             email: payload.email,
-        //             password: payload.password,
-        //         },
-        //         {
-        //             withCredentials: true,
-        //         }
-        //     )
-        //     .then((response) => {
-        //         history.push("/wall");
-        //     })
-        //     .catch((err) => {
-        //         // not authenticated
-        //         console.log(err.response);
-        //         if (err.response.data.errors) {
-        //             const errorMsg = err.response.data.errors.map(
-        //                 (err) => err.msg
-        //             );
-        //             // failed to register
-        //             setErrors([...errorMsg]);
-        //         } else {
-        //             setErrors(['Whoops please enter your credentials']);
-        //         }
-        //     });
+        const response = await axios
+            .post(
+                "http://localhost:3001/api/login",
+                {
+                    email: payload.email,
+                    password: payload.password,
+                },
+                {
+                    withCredentials: true
+                }
+            )
+            .then((response) => {
+                history.push("/wall");
+            })
+            .catch((err) => {
+                // not authenticated
+                console.log(err.response);
+                if (err.response.data.errors) {
+                    const errorMsg = err.response.data.errors.map(
+                        (err) => err.msg
+                    );
+                    // failed to register
+                    setErrors([...errorMsg]);
+                } else {
+                    setErrors(['Whoops please enter your credentials']);
+                }
+            });
 
         // console.log({ response });
 

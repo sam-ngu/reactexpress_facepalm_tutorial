@@ -13,6 +13,11 @@ const loadCommentsAggregate = [
             as: "comments",
         },
     },
+    {
+        $sort: {
+            createdAt: -1
+        }
+    }
 ];
 
 router.get("/posts", (req, res) => {
@@ -58,6 +63,11 @@ router.post("/posts", (req, res) => {
 
 
         await created.populate('user').execPopulate()
+
+        // to keep data structure consistent
+        created.comments = [];
+
+        console.log({created});
 
         res.json({
             data: created,

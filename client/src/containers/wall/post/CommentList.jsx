@@ -43,7 +43,8 @@ function CommentList(props){
         const hasCommentLoaded = comments !== null;
         return (
             <Button onClick={() => toggleComments(hasCommentLoaded)}>
-                {!hasCommentLoaded ? 'View' : 'Hide'} Comments ({props.post.comments.length})
+                {!hasCommentLoaded ? "View" : "Hide"} Comments (
+                {props.post.comments ? props.post.comments.length : 0})
             </Button>
         );
     }

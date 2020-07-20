@@ -99,7 +99,8 @@ router.post('/login',  (req, res, next) => {
     })(req, res, next);
 });
 
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
+    console.log('heyyyy');
     req.logout();
     req.session.destroy((err) => {
         if (err){
