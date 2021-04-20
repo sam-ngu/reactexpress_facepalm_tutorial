@@ -3,6 +3,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser"); // form data
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
+dotenv.config({ path: ".env" });
 const cors = require("cors");
 const corsConfig = require('./config/cors');
 const passport = require("passport");
@@ -10,8 +11,6 @@ const connectDb = require("./config/database");
 
 const MongoStore = require("connect-mongo")(session);
 const routes = require("./routes");
-dotenv.config({ path: ".env" });
-
 
 const app = express();
 

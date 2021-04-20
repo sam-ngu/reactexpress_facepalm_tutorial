@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 function Navbar(props) {
-
     
     const store = GlobalStore.useGlobalContext()
     const classes = useStyles();
@@ -45,10 +44,9 @@ function Navbar(props) {
                 </Typography>
 
                 {/* if user is not logged in then we display the logout button */}
-                {!isEmpty(store.auth.currentUser) && (
+                {!isEmpty(store.auth.authState.currentUser) && (
                     <Button color="inherit"> Logout</Button>
                 )}
-
             </Toolbar>
         </AppBar>
     );

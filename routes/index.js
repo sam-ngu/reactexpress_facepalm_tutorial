@@ -16,8 +16,8 @@ router.use(auth);
 
 router.use(AuthenticatedMiddleware)
 router.use(user);
-router.use(post)
-router.use(comment)
+router.use(post);
+router.use(comment);
 
 
 

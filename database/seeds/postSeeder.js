@@ -12,7 +12,6 @@ async function seedData() {
     console.log('creating post');
     for (let index = 0; index < 50; index++) {
 
-        
         const randomUser = await getRandomModel("User");
 
         const post = new Post({

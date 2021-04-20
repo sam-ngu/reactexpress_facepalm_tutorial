@@ -17,7 +17,7 @@ router.get('/users/:id', (req, res) => {
             data: result
         })
     })    
-})
+});
 
 router.post('/users', (req, res) => {
 
@@ -31,7 +31,7 @@ router.post('/users', (req, res) => {
     })
 
 
-})
+});
 
 router.patch('/users/:id', (req, res) => {
 
