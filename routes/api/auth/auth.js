@@ -14,8 +14,9 @@ router.post('/register', (req, res, next) => {
       validationErrors.push({
           msg: "Password must be at least 8 characters long",
       });
-  if (req.body.password !== req.body.password_again)
+  if (req.body.password !== req.body.password_again){
       validationErrors.push({ msg: "Passwords do not match" });
+  }
 
   if (validationErrors.length) {
       return res.status(422).json({
@@ -61,7 +62,7 @@ router.post('/register', (req, res, next) => {
   });
 
 
-})
+});
 
 router.post('/login',  (req, res, next) => {
 
@@ -104,7 +105,7 @@ router.get('/logout', (req, res) => {
     req.logout();
     req.session.destroy((err) => {
         if (err){
-            res.json({
+            return res.status(400).json({
                 data: {
                     error: "Failed to destroy the session during logout.",
                     err,

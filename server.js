@@ -1,6 +1,5 @@
 const express = require("express");
 const session = require("express-session");
-const bodyParser = require("body-parser"); // form data
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
@@ -18,8 +17,8 @@ connectDb();
 
 
 // Configure body parsing for AJAX requests
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
  
 

@@ -25,6 +25,15 @@ userSchema.pre("save", async function save(next) {
         return next();
     }
 
+    // abc --> daodpwajpodjwapdjawpjdifjpwajd
+    // abc(@da) --> 12e1jdioj09jfij3ijfoiwjiojg
+
+    // rainbow table
+    // map of pw vs hash
+
+    // salt -- string added to pw
+
+
     // register
     // enter password
     // go thru bcrypt

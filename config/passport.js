@@ -1,5 +1,4 @@
 const passport = require("passport");
-const _ = require("lodash");
 const User = require('./../models/User');
 const { Strategy: LocalStrategy } = require("passport-local");
 
@@ -39,7 +38,7 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
         // done(err, user, info pass back to controller)
       return done(null, false, { msg: `Email ${email} not found.` });
     }
-    if (!user.password) {
+    if (!password) {
       return done(null, false, { msg: 'Please enter a password.' });
     }
     user.comparePassword(password, (err, isMatch) => {
