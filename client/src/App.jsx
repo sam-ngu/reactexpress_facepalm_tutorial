@@ -6,6 +6,24 @@ import Register from "./pages/Register";
 import Wall from "./pages/Wall";
 import GlobalStore from "./utils/context/GlobalStore";
 
+
+// components (dumb component)  (cell)
+// generic 
+// button
+// card
+// popup
+
+// container (smart component) (organ)
+// specific to a page
+
+// page  (system)
+
+
+
+
+
+
+
 function App() {
 
     return (

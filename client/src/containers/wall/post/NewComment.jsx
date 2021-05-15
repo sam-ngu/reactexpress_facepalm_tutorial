@@ -16,7 +16,7 @@ function NewComment(props){
 
     const onSubmit = (event) => {
         event.preventDefault();
-        axios.post('http://localhost:3001/api/comments', {
+        axios.post('/api/comments', {
             post_id: props.post._id,
             body: comment
         }).then((response) => {

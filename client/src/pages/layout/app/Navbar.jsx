@@ -30,7 +30,7 @@ function Navbar(props) {
 
 
     const logout = () => {
-        axios.get('http://localhost:3001/api/logout')
+        axios.get('/api/logout')
             .then((response) => {
                 window.location.href = '/'
             }).catch((err) => {

@@ -19,7 +19,7 @@ function PostContainer(){
 
     // call post api to load all the post in page
     useEffect(() => {
-        axios.get('http://localhost:3001/api/posts', {
+        axios.get('/api/posts', {
             withCredentials: true,
         })
             .then((response) => {

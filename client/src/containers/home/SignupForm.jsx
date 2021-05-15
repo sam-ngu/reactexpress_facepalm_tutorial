@@ -63,7 +63,7 @@ function SignupForm() {
 
         // call api to login
         const response = axios
-            .post("http://localhost:3001/api/register", payload, {
+            .post("/api/register", payload, {
                 withCredentials: true
             })
             .then((res) => {

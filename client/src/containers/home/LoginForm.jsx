@@ -56,7 +56,7 @@ function LoginForm() {
 
         const response = await axios
             .post(
-                "http://localhost:3001/api/login",
+                "/api/login",
                 {
                     email: payload.email,
                     password: payload.password,

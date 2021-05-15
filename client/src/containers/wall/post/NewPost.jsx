@@ -43,7 +43,7 @@ function NewPost(props){
 
     const createPost = (event) => {
         event.preventDefault();
-        axios.post('http://localhost:3001/api/posts', {
+        axios.post('/api/posts', {
             title,
             body,
         }).then((response) => {
